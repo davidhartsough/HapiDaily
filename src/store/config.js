@@ -1,8 +1,8 @@
 export default {
-  apiKey: "__KEY__",
-  authDomain: "__ID__.firebaseapp.com",
-  databaseURL: "https://__ID__.firebaseio.com",
-  projectId: "__ID__",
+  apiKey: "AIzaSyAjj4Gvz-MrK02vVdlzflkbrVgOlS8QCFc",
+  authDomain: "hapi-daily.firebaseapp.com",
+  databaseURL: "https://hapi-daily.firebaseio.com",
+  projectId: "hapi-daily",
   storageBucket: "",
-  messagingSenderId: ""
+  messagingSenderId: "138874889008"
 };

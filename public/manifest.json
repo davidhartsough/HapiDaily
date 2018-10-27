@@ -1,6 +1,6 @@
 {
-  "short_name": "__SHORT_NAME__",
-  "name": "__NAME__",
+  "short_name": "HapiDaily",
+  "name": "HapiDaily",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,6 +10,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#1997FF",
+  "background_color": "#FAFDFF"
 }
