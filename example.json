@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "id": 123,
+      "goals": [
+        {
+          "id": 234,
+          "goal": "Bake for someone",
+          "person": "Steven Stevens",
+          "personId": 321,
+          "dateCompleted": "2018-03-31",
+          "isComplete": true
+        }
+      ],
+      "people": [
+        {
+          "id": 321,
+          "name": "Steven Stevens",
+          "impacts": 10
+        }
+      ]
+    }
+  ]
+}
