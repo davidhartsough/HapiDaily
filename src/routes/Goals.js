@@ -5,9 +5,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-// import InputLabel from "@material-ui/core/InputLabel";
-// import FormControl from "@material-ui/core/FormControl";
-// import Select from "@material-ui/core/Select";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import CreatableSelect from "react-select/lib/Creatable";
 import Select from "react-select";
@@ -297,7 +294,7 @@ class Goal extends React.Component {
   }
 }
 
-const GoalWithStyles = withStyles(goalStyles)(Goal);
+const GoalWithStyles = withStyles(goalStyles, { withTheme: true })(Goal);
 
 export default () => (
   <div>

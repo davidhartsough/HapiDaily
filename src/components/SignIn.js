@@ -1,7 +1,9 @@
 import React from "react";
+import firebase from "firebase/app";
+import "firebase/auth";
 import Typography from "@material-ui/core/Typography";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { withStyles } from "@material-ui/core/styles";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
 const styles = {
   root: {
@@ -16,21 +18,33 @@ const styles = {
   container: {
     minHeight: 166
   },
+  title: {
+    textAlign: "center"
+  },
   smallcaps: {
     fontVariant: "small-caps"
   }
 };
 
-const Loading = ({ classes }) => (
+const SignIn = ({ classes }) => (
   <div className={classes.root}>
     <div className={classes.container}>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom className={classes.title}>
         H<span className={classes.smallcaps}>api</span>
         Daily
       </Typography>
-      <CircularProgress />
+      <StyledFirebaseAuth
+        uiConfig={{
+          signInSuccessUrl: "/",
+          signInOptions: [
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebase.auth.EmailAuthProvider.PROVIDER_ID
+          ]
+        }}
+        firebaseAuth={firebase.auth()}
+      />
     </div>
   </div>
 );
 
-export default withStyles(styles)(Loading);
+export default withStyles(styles)(SignIn);

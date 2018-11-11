@@ -3,9 +3,9 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
-import { compose } from "redux";
-import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
+// import { compose } from "redux";
+// import { connect } from "react-redux";
+// import { firestoreConnect } from "react-redux-firebase";
 
 const data = [
   {

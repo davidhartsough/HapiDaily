@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 
-const styles = theme => ({
+const styles = {
   root: {
     padding: 24
   },
@@ -15,11 +15,11 @@ const styles = theme => ({
   logout: {
     marginTop: 16
   }
-});
+};
 
 const Settings = props => {
   const { auth, firebase, classes } = props;
-  const logout = () => console.log(firebase); // firebase.logout();
+  const logout = () => firebase.logout();
   return (
     <div className={classes.root}>
       <Typography variant="h5" gutterBottom>

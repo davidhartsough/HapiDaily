@@ -14,6 +14,9 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { withStyles } from "@material-ui/core/styles";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -63,35 +66,10 @@ const styles = theme => ({
   }
 });
 
-const thesePeople = [
-  {
-    id: "123",
-    name: "Steve Stevens",
-    number: 15
-  },
-  {
-    id: "321",
-    name: "Ryan Ryan",
-    number: 1
-  },
-  {
-    id: "234",
-    name: "Owen Owens",
-    number: 5
-  }
-];
-
-const createPerson = name => ({
-  id: "156" + name,
-  name,
-  number: 0
-});
-
 class People extends React.Component {
   state = {
     order: "desc",
-    orderBy: "number",
-    people: thesePeople,
+    orderBy: "impacts",
     open: false,
     name: ""
   };
@@ -105,10 +83,10 @@ class People extends React.Component {
   };
   sortByNumber = () => {
     const order =
-      this.state.orderBy === "number" && this.state.order === "desc"
+      this.state.orderBy === "impacts" && this.state.order === "desc"
         ? "asc"
         : "desc";
-    this.setState({ order, orderBy: "number" });
+    this.setState({ order, orderBy: "impacts" });
   };
 
   add = () => {
@@ -127,9 +105,16 @@ class People extends React.Component {
 
   handleSave = () => {
     if (this.state.name.length > 2) {
+      this.props.firestore
+        .collection("users")
+        .doc(this.props.uid)
+        .collection("people")
+        .add({
+          name: this.state.name,
+          impacts: 0
+        });
       this.setState({
         open: false,
-        people: [...this.state.people, createPerson(this.state.name)],
         name: ""
       });
     }
@@ -143,8 +128,8 @@ class People extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
-    const { order, orderBy, people } = this.state;
+    const { people, classes } = this.props;
+    const { order, orderBy } = this.state;
     return (
       <div className={classes.root}>
         <Table>
@@ -165,13 +150,13 @@ class People extends React.Component {
                 </Tooltip>
               </TableCell>
               <TableCell
-                sortDirection={orderBy === "number" ? order : false}
+                sortDirection={orderBy === "impacts" ? order : false}
                 numeric
                 className={classes.cellHead}
               >
                 <Tooltip title="Sort" placement="bottom-end">
                   <TableSortLabel
-                    active={orderBy === "number"}
+                    active={orderBy === "impacts"}
                     direction={order}
                     onClick={this.sortByNumber}
                   >
@@ -182,16 +167,22 @@ class People extends React.Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {stableSort(people, getSorting(order, orderBy)).map(person => (
-              <TableRow key={person.id}>
-                <TableCell component="th" scope="row" className={classes.cell}>
-                  {person.name}
-                </TableCell>
-                <TableCell numeric className={classes.cell}>
-                  {person.number}
-                </TableCell>
-              </TableRow>
-            ))}
+            {stableSort(Object.values(people), getSorting(order, orderBy)).map(
+              (person, index) => (
+                <TableRow key={person.name + person.impacts + index}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    className={classes.cell}
+                  >
+                    {person.name}
+                  </TableCell>
+                  <TableCell numeric className={classes.cell}>
+                    {person.impacts}
+                  </TableCell>
+                </TableRow>
+              )
+            )}
           </TableBody>
         </Table>
         <Button
@@ -233,15 +224,12 @@ class People extends React.Component {
   }
 }
 
-/*
 export default compose(
-  connect(({ firebase: { auth } }) => ({ auth })),
-  withStyles(styles),
-  firestoreConnect([
-    { collection: 'todos', where: ['done', '==', false] }
-    { collection: 'users', doc: props.userId }
-  ]),
+  firestoreConnect(props => [`users/${props.uid}/people`]),
+  connect((state, props) => ({
+    people: state.firestore.data.users
+      ? state.firestore.data.users[props.uid].people
+      : {}
+  })),
+  withStyles(styles, { withTheme: true })
 )(People);
-*/
-
-export default withStyles(styles)(People);
