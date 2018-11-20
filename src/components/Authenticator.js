@@ -1,38 +1,33 @@
-import React from "react";
-import { isLoaded, isEmpty } from "react-redux-firebase";
-import Loading from "./Loading";
-import SignIn from "./SignIn";
-import Routes from "../routes";
-import { connect } from "react-redux";
-import { withFirestore } from "react-redux-firebase";
+import React from 'react';
+import { isLoaded, isEmpty, withFirestore } from 'react-redux-firebase';
+import { connect } from 'react-redux';
+import Loading from './Loading';
+import SignIn from './SignIn';
+import Routes from '../routes';
 
-const Authenticator = ({ auth, profile, firestore, children }) => {
+const Authenticator = ({ auth, profile, firestore }) => {
   if (isLoaded(auth)) {
     if (isEmpty(auth)) {
       return <SignIn />;
-    } else {
-      if (isLoaded(profile)) {
-        if (isEmpty(profile)) {
-          firestore
-            .collection("users")
-            .doc(auth.uid)
-            .set({
-              name: auth.displayName
-            });
-          return <Loading />;
-        } else {
-          return <Routes uid={auth.uid} />;
-        }
-      } else {
+    }
+    if (isLoaded(profile)) {
+      if (isEmpty(profile)) {
+        firestore
+          .collection('users')
+          .doc(auth.uid)
+          .set({
+            name: auth.displayName,
+          });
         return <Loading />;
       }
+      return <Routes uid={auth.uid} />;
     }
-  } else {
     return <Loading />;
   }
+  return <Loading />;
 };
 
 export default connect(({ firebase: { auth, profile } }) => ({
   auth,
-  profile
+  profile,
 }))(withFirestore(Authenticator));

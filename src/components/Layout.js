@@ -1,89 +1,89 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { withStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import Hidden from "@material-ui/core/Hidden";
-import Divider from "@material-ui/core/Divider";
-import MenuIcon from "@material-ui/icons/Menu";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import TodayIcon from "@material-ui/icons/Today";
-import SettingsIcon from "@material-ui/icons/Settings";
-import PeopleIcon from "@material-ui/icons/People";
-import CheckBoxIcon from "@material-ui/icons/CheckBox";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import Hidden from '@material-ui/core/Hidden';
+import Divider from '@material-ui/core/Divider';
+import MenuIcon from '@material-ui/icons/Menu';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import TodayIcon from '@material-ui/icons/Today';
+import SettingsIcon from '@material-ui/icons/Settings';
+import PeopleIcon from '@material-ui/icons/People';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
-    display: "flex"
+    display: 'flex',
   },
   drawer: {
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
-      flexShrink: 0
-    }
+      flexShrink: 0,
+    },
   },
   appBar: {
     marginLeft: drawerWidth,
-    [theme.breakpoints.up("sm")]: {
-      width: `calc(100% - ${drawerWidth}px)`
-    }
+    [theme.breakpoints.up('sm')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
   },
   menuButton: {
     marginRight: 20,
-    [theme.breakpoints.up("sm")]: {
-      display: "none"
-    }
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
   },
   toolbar: theme.mixins.toolbar,
   drawerHeader: {
-    display: "flex",
-    alignItems: "center",
+    display: 'flex',
+    alignItems: 'center',
     minHeight: 56,
     paddingLeft: 16,
     paddingRight: 16,
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up('sm')]: {
       minHeight: 64,
       paddingLeft: 24,
-      paddingRight: 24
-    }
+      paddingRight: 24,
+    },
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
   },
   content: {
     flexGrow: 1,
-    position: "relative"
+    position: 'relative',
   },
   smallcaps: {
-    fontVariant: "small-caps"
+    fontVariant: 'small-caps',
   },
   link: {
-    textDecoration: "none"
+    textDecoration: 'none',
   },
   activeLink: {
-    backgroundColor: "#eee"
+    backgroundColor: '#eee',
   },
   page: {
-    margin: "0 auto",
+    margin: '0 auto',
     maxWidth: 640,
-    [theme.breakpoints.up("sm")]: {
-      padding: "0.25rem 0 2rem 0"
-    }
-  }
+    [theme.breakpoints.up('sm')]: {
+      padding: '0.25rem 0 2rem 0',
+    },
+  },
 });
 
 class Layout extends React.Component {
   state = {
-    mobileOpen: false
+    mobileOpen: false,
   };
 
   handleDrawerToggle = () => {
@@ -91,19 +91,21 @@ class Layout extends React.Component {
   };
 
   closeDrawer = () => {
-    this.setState(state => ({ mobileOpen: false }));
+    this.setState({ mobileOpen: false });
   };
 
   render() {
     const path = window.location.pathname.substring(1);
     const pathName = path.charAt(0).toUpperCase() + path.substr(1);
     const { classes, children } = this.props;
+    const { mobileOpen } = this.state;
 
     const drawer = (
       <div>
         <div className={classes.drawerHeader}>
           <Typography variant="h6" color="inherit" noWrap>
-            H<span className={classes.smallcaps}>api</span>
+            H
+            <span className={classes.smallcaps}>api</span>
             Daily
           </Typography>
         </div>
@@ -111,10 +113,7 @@ class Layout extends React.Component {
         <List>
           <div onClick={this.closeDrawer}>
             <Link to="/goals" className={classes.link}>
-              <ListItem
-                button
-                className={path === "goals" ? classes.activeLink : null}
-              >
+              <ListItem button className={path === 'goals' ? classes.activeLink : null}>
                 <ListItemIcon>
                   <TodayIcon />
                 </ListItemIcon>
@@ -122,10 +121,7 @@ class Layout extends React.Component {
               </ListItem>
             </Link>
             <Link to="/completed" className={classes.link}>
-              <ListItem
-                button
-                className={path === "completed" ? classes.activeLink : null}
-              >
+              <ListItem button className={path === 'completed' ? classes.activeLink : null}>
                 <ListItemIcon>
                   <CheckBoxIcon />
                 </ListItemIcon>
@@ -133,10 +129,7 @@ class Layout extends React.Component {
               </ListItem>
             </Link>
             <Link to="/people" className={classes.link}>
-              <ListItem
-                button
-                className={path === "people" ? classes.activeLink : null}
-              >
+              <ListItem button className={path === 'people' ? classes.activeLink : null}>
                 <ListItemIcon>
                   <PeopleIcon />
                 </ListItemIcon>
@@ -149,10 +142,7 @@ class Layout extends React.Component {
         <List>
           <div onClick={this.closeDrawer}>
             <Link to="/settings" className={classes.link}>
-              <ListItem
-                button
-                className={path === "settings" ? classes.activeLink : null}
-              >
+              <ListItem button className={path === 'settings' ? classes.activeLink : null}>
                 <ListItemIcon>
                   <SettingsIcon />
                 </ListItemIcon>
@@ -187,13 +177,13 @@ class Layout extends React.Component {
             <Drawer
               container={this.props.container}
               variant="temporary"
-              open={this.state.mobileOpen}
+              open={mobileOpen}
               onClose={this.handleDrawerToggle}
               classes={{
-                paper: classes.drawerPaper
+                paper: classes.drawerPaper,
               }}
               ModalProps={{
-                keepMounted: true
+                keepMounted: true,
               }}
             >
               {drawer}
@@ -202,7 +192,7 @@ class Layout extends React.Component {
           <Hidden xsDown implementation="css">
             <Drawer
               classes={{
-                paper: classes.drawerPaper
+                paper: classes.drawerPaper,
               }}
               variant="permanent"
               open

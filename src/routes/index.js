@@ -1,15 +1,12 @@
-import React from "react";
+import React from 'react';
 import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect
-} from "react-router-dom";
-import Goals from "./Goals";
-import Completed from "./Completed";
-import People from "./People";
-import Settings from "./Settings";
-import Layout from "../components/Layout";
+  BrowserRouter as Router, Route, Switch, Redirect,
+} from 'react-router-dom';
+import Goals from './Goals';
+import Completed from './Completed';
+import People from './People';
+import Settings from './Settings';
+import Layout from '../components/Layout';
 
 const RedirectToGoals = () => <Redirect to="/goals" />;
 
