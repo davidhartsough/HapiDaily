@@ -1,10 +1,16 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import configureStore from './store';
+import React from "react";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import rootReducer from "./reducers";
 
-const initialState = window.__INITIAL_STATE__ || {
-  firebase: { authError: null },
-};
-const store = configureStore(initialState);
+const goals = JSON.parse(window.localStorage.getItem("goals"));
+const impacts = JSON.parse(window.localStorage.getItem("impacts"));
+const people = JSON.parse(window.localStorage.getItem("people"));
 
-export default props => <Provider store={store}>{props.children}</Provider>;
+const store = createStore(rootReducer, {
+  goals: goals && Array.isArray(goals) ? goals : [],
+  impacts: impacts && Array.isArray(impacts) ? impacts : [],
+  people: people && Array.isArray(people) ? people : []
+});
+
+export default ({ children }) => <Provider store={store}>{children}</Provider>;

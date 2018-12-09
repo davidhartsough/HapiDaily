@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import { firebaseReducer } from 'react-redux-firebase';
-import { firestoreReducer } from 'redux-firestore';
+import goals from './goals';
+import impacts from './impacts';
+import people from './people';
 
-const rootReducer = combineReducers({
-  firebase: firebaseReducer,
-  firestore: firestoreReducer,
+export default combineReducers({
+  goals,
+  impacts,
+  people
 });
-
-export default rootReducer;

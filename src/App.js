@@ -1,28 +1,28 @@
-import React from 'react';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import StoreProvider from './store';
-import Authenticator from './components/Authenticator';
+import React from "react";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import DataProvider from "./store";
+import Main from "./Main";
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#1997ff',
-      light: '#55bbff',
-      dark: '#006acb',
+      main: "#1997ff",
+      light: "#55bbff",
+      dark: "#006acb"
     },
     secondary: {
-      main: '#ffa319',
-    },
+      main: "#fff"
+    }
   },
   typography: {
-    useNextVariants: true,
-  },
+    useNextVariants: true
+  }
 });
 
 export default () => (
-  <StoreProvider>
+  <DataProvider>
     <MuiThemeProvider theme={theme}>
-      <Authenticator />
+      <Main />
     </MuiThemeProvider>
-  </StoreProvider>
+  </DataProvider>
 );

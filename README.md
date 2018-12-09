@@ -2,4 +2,4 @@
 
 ## Origins
 
-This project was bootstrapped with [react-redux-firestore-app](https://github.com/davidhartsough/react-redux-firestore-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
