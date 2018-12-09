@@ -96,7 +96,7 @@ class GoalsPage extends React.Component {
               goal={goals[index].goal}
               person={goals[index].person}
               goalList={GoalList}
-              people={people}
+              people={people.length ? people : ["someone"]}
               save={this.saveEdit}
               createPerson={createPerson}
             />
