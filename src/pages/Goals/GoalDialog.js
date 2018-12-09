@@ -36,10 +36,12 @@ const selectStyles = {
 const styles = {
   selection: {
     position: "relative",
-    marginBottom: 32
+    marginBottom: 32,
+    minHeight: 48
   },
   select: {
-    position: "absolute"
+    position: "absolute",
+    width: "100%"
   }
 };
 
